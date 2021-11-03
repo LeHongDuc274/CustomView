@@ -29,6 +29,7 @@ class ClockView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private val listHours = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
     private val mPadding = 50F
     private var calendar: Calendar = Calendar.getInstance(Locale.KOREA)
+    private var curHour = calendar[Calendar.HOUR_OF_DAY]
     private var isChangedtime = false
     var change : ((Calendar) -> Unit)? = null
     val mPaintCir: Paint = Paint().apply {
@@ -65,11 +66,17 @@ class ClockView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     }
     val mReact = Rect()
 
-    val size = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 20F, resources.displayMetrics)
+    val size = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 18F, resources.displayMetrics)
+    val largSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 22F, resources.displayMetrics)
     var mPaintText = Paint().apply {
         setColor(Color.WHITE)
         style = Paint.Style.FILL
         textSize = size
+    }
+    var mPaintHighLight = Paint().apply {
+        setColor(Color.RED)
+        style = Paint.Style.FILL
+        textSize = largSize
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -114,9 +121,6 @@ class ClockView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
             }
         }
     }
-//    init {
-//        setCalendar(2,59,50)
-//    }
     fun getCalender(action:((Calendar) -> Unit)?){
         change = action
     }
@@ -125,6 +129,11 @@ class ClockView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
             calendar = Calendar.getInstance(Locale.KOREA)
         }
         change?.invoke(calendar)
+        //check cur change
+        if(curHour!=calendar[Calendar.HOUR_OF_DAY]){
+            curHour = calendar[Calendar.HOUR_OF_DAY]
+            drawNumber(canvas)
+        }
         var hour = calendar.get(Calendar.HOUR_OF_DAY)
         hour = if (hour > 12) (hour - 12) else hour
         val minute = calendar.get(Calendar.MINUTE)
@@ -157,12 +166,23 @@ class ClockView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
             val angle = PI / 6 * (hour - 3)
             val xDot = mWidth / 2 + cos(angle) * (mRadius)
             val yDot = mHeight / 2 + sin(angle) * (mRadius)
-            val mX = (mWidth / 2 + cos(angle) * (mRadius - mPadding) - mReact.width() / 2).toFloat()
+            val mX = (mWidth / 2 + cos(angle) * (mRadius - mPadding)).toFloat()
             val mY =
-                (mHeight / 2 + sin(angle) * (mRadius - mPadding) + mReact.height() / 2).toFloat()
-            canvas?.drawText(hour.toString(), mX, mY, mPaintText)
+                (mHeight / 2 + sin(angle) * (mRadius - mPadding) ).toFloat()
+            canvas?.save()
+            canvas?.rotate (hour*30F,mX,mY)
+            if (!compareHour(hour,curHour)){
+                canvas?.drawText(hour.toString(), mX - mReact.width()/2, mY +mReact.height() / 2, mPaintText)
+            } else{
+                canvas?.drawText(hour.toString(), mX - mReact.width()/2, mY +mReact.height() / 2, mPaintHighLight)
+            }
+            canvas?.restore()
+            canvas?.save()
             canvas?.drawCircle(xDot.toFloat(), yDot.toFloat(), 8F, mPaintDot)
         }
+    }
+    private fun compareHour(hour12: Int,hour24: Int) : Boolean{
+        return (hour12==hour24) || (hour12 == (hour24 -12))
     }
     override fun onDetachedFromWindow() {
         isChangedtime = false

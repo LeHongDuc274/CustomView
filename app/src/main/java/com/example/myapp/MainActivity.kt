@@ -16,6 +16,7 @@ import com.example.myapp.customview.MyEditText
 import com.example.myapp.databinding.ActivityMainBinding
 import com.example.myapp.viewmodel.MainViewModel
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -33,12 +34,14 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun initView() {
-        val format = SimpleDateFormat("HH:mm:SS")
+        //DateTimeFormatter.ofPattern("HH:mm:SS")
+        val format = SimpleDateFormat("h:m")
         val date = Calendar.getInstance().time
-        Toast.makeText(this,format.format(date),Toast.LENGTH_LONG).show()
+        Toast.makeText(this, format.format(date), Toast.LENGTH_LONG).show()
         binding.clock.getCalender {
             binding.tvCurtime.text =
-                "${it[Calendar.HOUR_OF_DAY]}:${it[Calendar.MINUTE]}:${it[Calendar.SECOND]}"
+                "${it[Calendar.HOUR_OF_DAY]}:${it[Calendar.MINUTE]}:" +
+                        "${if (it[Calendar.SECOND] > 9) it[Calendar.SECOND] else "0" + it[Calendar.SECOND]}"
         }
 
         binding.btnSet.setOnClickListener {
@@ -49,10 +52,9 @@ class MainActivity : AppCompatActivity() {
                 binding.clock.setCalendar(hour.toInt(), minute.toInt(), second.toInt())
             }
         }
-        vm.mess.observe(this){
-            Toast.makeText(this,it,Toast.LENGTH_LONG).show()
+        vm.mess.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
     }
-
 
 }
