@@ -102,7 +102,6 @@ class ClockView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         drawNumber(canvas)
         drawCenterDot(canvas)
         drawClockhand(canvas)
-
     }
      var job: Job? = null
     fun setCalendar(hour: Int, minute: Int, second: Int) {

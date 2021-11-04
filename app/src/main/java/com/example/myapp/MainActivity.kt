@@ -32,16 +32,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("SetTextI18n", "SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat")
     private fun initView() {
-        //DateTimeFormatter.ofPattern("HH:mm:SS")
-        val format = SimpleDateFormat("h:m")
-        val date = Calendar.getInstance().time
-        Toast.makeText(this, format.format(date), Toast.LENGTH_LONG).show()
+        val format = SimpleDateFormat("HH : mm : ss")
         binding.clock.getCalender {
-            binding.tvCurtime.text =
-                "${it[Calendar.HOUR_OF_DAY]}:${it[Calendar.MINUTE]}:" +
-                        "${if (it[Calendar.SECOND] > 9) it[Calendar.SECOND] else "0" + it[Calendar.SECOND]}"
+            val time = it.time
+            binding.tvCurtime.text = format.format(time)
         }
 
         binding.btnSet.setOnClickListener {
@@ -56,5 +52,4 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
     }
-
 }

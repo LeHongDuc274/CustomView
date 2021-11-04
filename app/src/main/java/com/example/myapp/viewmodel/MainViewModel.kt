@@ -10,7 +10,7 @@ class MainViewModel: ViewModel() {
 
     fun checkInput(hour: String, minute: String, second: String): Boolean {
         if (hour.isNotEmpty() && minute.isNotEmpty() && second.isNotEmpty()) {
-            return (hour.toInt() in 1..12 && minute.toInt() in 1..60 && second.toInt() in 1..60)
+            return (hour.toInt() in 1..24 && minute.toInt() in 1..60 && second.toInt() in 1..60)
         } else {
             _mess.value = "Hãy nhập đủ thông tin"
             return false

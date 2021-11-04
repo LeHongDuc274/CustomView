@@ -5,4 +5,9 @@
         <attr name="hint" format="string" />
         <attr name="mycolor" format="reference|color"/>
     </declare-styleable>
+    <declare-styleable name="PatternLockView">
+
+
+    </declare-styleable>
+
 </resources>
