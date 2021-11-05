@@ -70,9 +70,7 @@ class PatternLockView : GridLayout {
                 }
                 invalidate()
             }
-
             MotionEvent.ACTION_UP -> finishMove()
-
             MotionEvent.ACTION_CANCEL -> reset()
             else -> return false
         }
@@ -126,8 +124,10 @@ class PatternLockView : GridLayout {
     private fun onCellSelected(cell: Cell) {
         listCellSelected.add(cell)
         Log.e("size", listCellSelected.size.toString())
+
         cell.setState(STATE_SELECTED)
         cell.invalidate()
+
         var center = cell.getCenter()
         if (listCellSelected.size == 1) {
             path.moveTo(center.first.toFloat(), center.second.toFloat())

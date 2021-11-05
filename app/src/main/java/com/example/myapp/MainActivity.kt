@@ -1,6 +1,7 @@
 package com.example.myapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapp.activities.AnimationActivity
 import com.example.myapp.customview.ClockView
 import com.example.myapp.customview.MyEditText
 import com.example.myapp.databinding.ActivityMainBinding
@@ -50,6 +52,10 @@ class MainActivity : AppCompatActivity() {
         }
         vm.mess.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        }
+        binding.btnNext.setOnClickListener {
+            val intent = Intent(this,AnimationActivity::class.java)
+            startActivity(intent)
         }
     }
 }

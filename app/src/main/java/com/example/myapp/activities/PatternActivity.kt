@@ -28,6 +28,11 @@ class PatternActivity : AppCompatActivity() {
         initControls()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     @RequiresApi(Build.VERSION_CODES.M)
     private fun initControls() {
         // editText
