@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Trainning/W10/CustomView/app/src/main/res/drawable/ic_baseline_exposure_plus_1_24.xml" value="0.2703125" />
         <entry key="..\:/Trainning/W10/CustomView/app/src/main/res/drawable/rect_black.xml" value="0.14635416666666667" />
         <entry key="..\:/Trainning/W10/CustomView/app/src/main/res/layout/activity_animation.xml" value="0.12" />
+        <entry key="..\:/Trainning/W10/CustomView/app/src/main/res/layout/activity_animation_second.xml" value="0.2" />
         <entry key="..\:/Trainning/W10/CustomView/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Trainning/W10/CustomView/app/src/main/res/layout/activity_pattern.xml" value="0.16" />
         <entry key="..\:/Trainning/W10/CustomView/app/src/main/res/layout/edittext_button.xml" value="0.4" />

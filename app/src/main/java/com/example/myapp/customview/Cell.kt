@@ -22,9 +22,11 @@ internal class Cell(val pos: Int, context: Context?) : View(context) {
     private val errorColor: Int = Color.RED
     private var radius: Float = 0F
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        var mWidth = MeasureSpec.getSize(widthMeasureSpec) / 3
-        radius = mWidth / 10F
-        setMeasuredDimension(mWidth, mWidth)
+        val mWidth = MeasureSpec.getSize(widthMeasureSpec) / 3
+        val mHeight = MeasureSpec.getSize(heightMeasureSpec) / 3
+        val size = Math.min(mHeight,mWidth)
+        radius = size / 10F
+        setMeasuredDimension(size, size)
     }
 
     override fun onDraw(canvas: Canvas?) {

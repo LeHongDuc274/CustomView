@@ -39,6 +39,7 @@ class PatternLockView : GridLayout {
         color = Color.WHITE
         strokeWidth = 10F
     }
+
     private fun initCells() {
         for (i in 0..2) {
             for (j in 0..2) {

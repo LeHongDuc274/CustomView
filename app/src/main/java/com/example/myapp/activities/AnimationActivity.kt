@@ -2,6 +2,7 @@ package com.example.myapp.activities
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -63,6 +64,10 @@ class AnimationActivity : AppCompatActivity() {
         }
         binding.btnRotate.setOnClickListener {
             rotateView()
+        }
+        binding.btnNext.setOnClickListener {
+            val intent = Intent(this,AnimationSecondActivity::class.java)
+            startActivity(intent)
         }
     }
 
